@@ -1,152 +1,106 @@
-# 🌐 Language Detector Web App
+# 🧠 AI Background Subtractor
 
-> **Detect the language of any text input instantly using Python, Flask, and LangDetect. Tracks detection history with a clean web UI and smart caching.**
-
----
-
-## 📖 Overview
-
-**Language Detector** is a full-stack Flask web application that uses the `langdetect` library to detect the language of any given text. It includes:
-
-* 🧠 **Automatic Language Detection** using `langdetect`
-* 💾 **Detection History Tracking** with SQLite (via SQLAlchemy)
-* ⚡ **Smart Caching** for faster repeat detection
-* 🖥️ **Responsive Web Interface** with recent detection previews
-
-Built for fast prototyping, linguistic demos, and simple multi-language handling.
+A real-time background subtraction web application built using **Python**, **OpenCV**, and **Flask**. It features dynamic foreground detection using classic computer vision algorithms — **KNN** and **MOG2** — with a smooth, modern UI.
 
 ---
 
-## ⚙️ Features
+## 🚀 Features
 
-### 🧠 Instant Language Detection
-
-* Uses `langdetect` to identify the language code (e.g., `en`, `fr`, `de`, `hi`)
-* Shows both code and full language name using `pycountry`
-
-### 💾 Recent Detection History
-
-* Displays last 5 detections on home page
-* View complete paginated history on `/history` page
-
-### 🚀 Fast Caching
-
-* Avoids repeated detection for same text using a TTL-based cache (5 minutes default)
-
-### 🖥️ Clean Web Interface
-
-* Built with HTML/CSS and modular templates (using Jinja2)
-* Includes 404 and 500 error pages
+- 📸 Live Webcam Feed  
+- ✂️ Real-time Background Subtraction  
+- 🧠 Toggle Between KNN and MOG2 Algorithms  
+- 🌈 Colored Foreground & Shadow Detection (Green = Foreground, Red = Shadows)  
+- 🖼️ Side-by-Side Original vs Processed Display  
+- 🧪 Algorithm Selection UI  
+- 🎨 Stylish Tailwind CSS Interface  
+- ✅ Fully Local Python-Flask App (No external API needed)
 
 ---
 
-## 🛠️ Technologies Used
-
-| Category           | Tech Stack                        |
-| ------------------ | --------------------------------- |
-| Backend            | Flask (Python)                    |
-| Language Detection | langdetect, pycountry             |
-| Database           | SQLite + SQLAlchemy               |
-| Frontend           | HTML, CSS (custom), JS            |
-| Caching            | TTL-based manual Python decorator |
-
----
-
-## 📂 Project Structure
+## 📂 Folder Structure
 
 ```
-LanguageDetectorApp
-├── templates
-│   ├── base.html
-│   ├── index.html
-│   ├── history.html
-│   ├── 404.html
-│   └── 500.html
-├── static
-│   ├── css
-│   │   └── style.css
-│   └── js
-│       └── script.js
-├── app.py              # Main Flask application
-└── language_history.db # Auto-generated SQLite DB
+AiBackgroundSubtractor/
+├── templates/
+│   └── index.html           # Web UI
+└── app.py                   # Flask backend with OpenCV logic
 ```
 
 ---
 
-## 🔌 Flask Endpoints
+## ⚙️ Technologies Used
 
-| Route      | Description                                    |
-| ---------- | ---------------------------------------------- |
-| `/`        | Home page with text input + recent detections  |
-| `/detect`  | API endpoint for POST-based language detection |
-| `/history` | Full history page with pagination              |
-
----
-
-## 🚀 Getting Started
-
-1. **Clone the Repository**
-
-```bash
-git clone https://github.com/Aayushinit/LanguageDetectorApp.git
-cd LanguageDetectorApp
-```
-
-2. **Install Dependencies**
-
-```bash
-pip install flask langdetect pycountry flask_sqlalchemy
-```
-
-3. **Run the App**
-
-```bash
-python app.py
-```
-
-4. **Visit in Browser**
-   [http://localhost:5000](http://localhost:5000)
+| Technology      | Purpose                                  |
+|-----------------|------------------------------------------|
+| **Python**      | Backend logic and OpenCV processing      |
+| **OpenCV**      | Video capture and background subtraction |
+| **Flask**       | Local web server and API routes          |
+| **Tailwind CSS**| Modern, responsive UI styling            |
+| **HTML / JS**   | Frontend structure and interactivity     |
 
 ---
 
-## 💡 How It Works
+## 🎯 How It Works
 
-* Accepts user text input from the frontend
-* `langdetect` attempts to detect language code
-* `pycountry` maps language code to human-readable name
-* Result is cached and also saved in the database
-* History is displayed and paginated with timestamps
+- Your webcam provides a live video stream via **OpenCV**.  
+- Each frame is processed by a **background subtractor**:
+  - `KNN`: K-Nearest Neighbors method.
+  - `MOG2`: Gaussian Mixture Model approach.
+- Foreground and shadows are highlighted using color masks:
+  - 🟩 Foreground → Green
+  - 🟥 Shadows → Red
+- The processed output is streamed in real-time alongside the raw feed.
 
 ---
 
-## 🔮 Future Improvements
+## 🛠️ How to Run Locally
 
-* 🔤 Display detection confidence (if supported)
-* 🌍 Add language flag icons
-* 💬 Translate detected text
-* 💽 Export detection history as CSV
-* 📱 Mobile-optimized interface with Tailwind CSS
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Aayushinit/AiBackgroundSubtractor.git
+   cd AiBackgroundSubtractor
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   pip install flask opencv-python
+   ```
+
+3. **Run the app**:
+   ```bash
+   python app.py
+   ```
+
+4. **View in browser**:  
+   Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
+
+> 📸 Make sure your webcam is connected and not being used by another app.
+
+---
+
+## 📌 Use Cases
+
+- Motion detection and surveillance  
+- Human-computer interaction projects  
+- Educational demos for Computer Vision  
+- Lightweight vision system for robotics  
+
+---
+
+## 📃 License
+
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
 ## 👨‍💻 Author
 
-**Aayush Kadam** — Final Year AI & ML Student | Python & Web Enthusiast
-
-> "Giving apps the power to understand language—one line at a time."
-
-[LinkedIn](https://www.linkedin.com/in/aayush-kadam-a3454a2b8) · [GitHub](https://github.com/Aayushinit)
+**Aayush Kadam**  
+Final Year AI & Robotics Enthusiast  
+GitHub: [github.com/your-username](https://github.com/Aayushinit)
 
 ---
 
-## ⭐️ Show Your Support
-
-If you find this project helpful, please ⭐ the repo and share with your network!
-
 ---
 
-## 📜 License
-
-Licensed under the [MIT License](LICENSE).
-
-> UI and logic were developed for educational and demonstration purposes.
+> ⭐ If you found this project useful, give it a star and share it!
